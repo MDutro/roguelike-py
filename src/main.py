@@ -3,21 +3,24 @@ from actions import EscapeAction, MovementAction
 from player_inputs import EventHandler
 
 def main() -> None:
-    screen_width = 150
-    screen_height = 75
+    screen_width, screen_height = 80, 60
 
     player_x = int(screen_width / 2)
     player_y = int(screen_height / 2)
 
     tileset = tcod.tileset.load_tilesheet(
-        "./img/dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        "./img/dejavu16x16_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
 
     event_handler = EventHandler()
-    
+    # create console
+    console = tcod.Console(screen_width, screen_height)
+    # create the actual window
     with tcod.context.new_terminal(
-        screen_width,
-        screen_height,
+        # screen_width,
+        # screen_height,
+        columns = 100,
+        rows = 60,
         tileset = tileset,
         title = "Dungeon of Doom!!!",
         vsync = True,
@@ -25,9 +28,9 @@ def main() -> None:
         root_console = tcod.Console(screen_width, screen_height, order="F")
         while True:
             root_console.print(x=player_x, y=player_y, string="@")
-
+            # print stuff to the console/screen
             context.present(root_console)
-
+            # clear the console so you don't leave a trail as you move around
             root_console.clear()
 
             for event in tcod.event.wait():                
