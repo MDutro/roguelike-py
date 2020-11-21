@@ -16,11 +16,11 @@ def main() -> None:
     # create console
     console = tcod.Console(screen_width, screen_height)
     # create the actual window
-    with tcod.context.new_terminal(
+    with tcod.context.new(
         # screen_width,
         # screen_height,
-        columns = 100,
-        rows = 60,
+        columns = console.width,
+        rows = console.height,
         tileset = tileset,
         title = "Dungeon of Doom!!!",
         vsync = True,
